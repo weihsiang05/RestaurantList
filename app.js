@@ -16,7 +16,19 @@ app.get('/', (req, res) => {
 })
 
 app.get('/restaurant', (req, res) => {
-  res.render('index', { restaurant })
+  //keyword為<input></input>中的name="keyword"
+  const keywords = req.query.keyword?.trim()
+  const matchedSerach = keywords ? restaurant.filter((rest) => {
+    return Object.values(rest).some((property) => {
+      if (typeof property === 'string') {
+        return property.toLowerCase().includes(keywords.toLowerCase())
+      } else {
+        return false
+      }
+    })
+  }) : restaurant
+
+  res.render('index', { restaurant: matchedSerach, keywords })
 })
 
 app.get('/restaurant/:id', (req, res) => {
