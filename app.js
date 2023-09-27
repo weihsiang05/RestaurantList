@@ -11,19 +11,49 @@ app.set('view engine', '.hbs')
 app.set('views', './views')
 
 // 傳入靜態網頁
-//app.use(express.static('public'))
+app.use(express.static('public'))
+app.use(express.urlencoded({ extended: true }))
 
 app.get('/', (req, res) => {
   res.redirect('/restaurant')
 })
 
 app.get('/restaurant', (req, res) => {
-  return Restaurant.findAll()
-    .then((restaurants) => {
-      res.send({ restaurants })
+  return Restaurant.findAll({
+    attributes: ['id', 'name', 'name_en', 'category', 'image', 'location', 'phone', 'google_map', 'rating', 'description'],
+    raw: true
+  })
+    .then((restaurant) => {
+      res.render('index', { restaurant })
     })
     .catch((err) => {
       res.status(422).json(err)
+    })
+})
+
+app.get('/restaurant/new', (req, res) => {
+  res.render('new')
+})
+
+app.post('/restaurant', (req, res) => {
+  const restaurant = req.body
+
+  return Restaurant.create({
+    name: restaurant.name,
+    name_en: restaurant.englishName,
+    category: restaurant.category,
+    image: restaurant.imageUrl,
+    location: restaurant.location,
+    phone: restaurant.phone,
+    google_map: restaurant.googleMapUrl,
+    rating: restaurant.rating,
+    description: restaurant.description
+  })
+    .then(() => {
+      res.redirect('/restaurant')
+    })
+    .catch((err) => {
+      console.log(err)
     })
 })
 

@@ -25,6 +25,7 @@ module.exports = (sequelize, DataTypes) => {
     description: DataTypes.STRING
   }, {
     sequelize,
+    timestamps: false,
     modelName: 'Restaurant',
   });
   return Restaurant;

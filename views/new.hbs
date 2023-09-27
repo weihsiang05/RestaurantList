@@ -1,0 +1,105 @@
+<header>
+  <!-- navigation -->
+  <nav class="navbar navbar-light bg-light">
+    <div class="container">
+      <a class="navbar-brand" href="/">
+        <img src="https://assets-lighthouse.s3.amazonaws.com/uploads/image/file/6227/restaurant-list-logo.png"
+          width="30" height="30" class="d-inline-block align-top" alt="我的餐廳清單">
+        我的餐廳清單
+      </a>
+    </div>
+  </nav>
+  <div class="banner"></div>
+  <h1 class="mb-1 restaurant-show-title">餐廳編輯</h1>
+</header>
+
+
+
+<div class="container-fluid d-flex align-items-center justify-content-center">
+  <form action="/restaurant" method="POST">
+    <div class="card border-light mb-3" style="width: 1000px; height: 700px;">
+      <div class="card-body text-secondary">
+        <div class="card-text">
+          <div class="row justify-content-between mb-4 mt-4">
+            <div class="col-md-2">
+              <label class="fw-bold" for="name">Name:</label>
+            </div>
+            <div class="col-md-8">
+              <input class="col-md-10" type="text" id="name" name="name" required>
+            </div>
+          </div>
+          <div class="row justify-content-between mb-4 mt-4">
+            <div class="col-md-2">
+              <label class="fw-bold" for="englishName">English Name:</label>
+            </div>
+            <div class="col-md-8">
+              <input class="col-md-10" type="text" id="englishName" name="englishName" required>
+            </div>
+          </div>
+          <div class="row justify-content-between mb-4 mt-4">
+            <div class="col-md-2">
+              <label class="fw-bold" for="category">Category:</label>
+            </div>
+            <div class="col-md-8">
+              <input class="col-md-10" type="text" id="category" name="category" required>
+            </div>
+          </div>
+          <div class="row justify-content-between mb-4 mt-4">
+            <div class="col-md-2">
+              <label class="fw-bold" for="imageUrl">Image Url:</label>
+            </div>
+            <div class="col-md-8">
+              <input class="col-md-10" type="text" id="imageUrl" name="imageUrl" required>
+            </div>
+          </div>
+          <div class="row justify-content-between mb-4 mt-4">
+            <div class="col-md-2">
+              <label class="fw-bold" for="location">Location:</label>
+            </div>
+            <div class="col-md-8">
+              <input class="col-md-10" type="text" id="location" name="location" required>
+            </div>
+          </div>
+          <div class="row justify-content-between mb-4 mt-4">
+            <div class="col-md-2">
+              <label class="fw-bold" for="phone">Phone:</label>
+            </div>
+            <div class="col-md-8">
+              <input class="col-md-10" type="text" id="phone" name="phone" required>
+            </div>
+          </div>
+          <div class="row justify-content-between mb-4 mt-4">
+            <div class="col-md-2">
+              <label class="fw-bold" for="googleMapUrl">Google Map Url:</label>
+            </div>
+            <div class="col-md-8">
+              <input class="col-md-10" type="text" id="googleMapUrl" name="googleMapUrl" required>
+            </div>
+          </div>
+          <div class="row justify-content-between mb-4 mt-4">
+            <div class="col-md-2">
+              <label class="fw-bold" for="rating">Rating:</label>
+            </div>
+            <div class="col-md-8">
+              <input class="col-md-10" type="text" id="rating" name="rating" required>
+            </div>
+          </div>
+          <div class="row justify-content-between mb-4 mt-4">
+            <div class="col-md-2">
+              <label class="fw-bold" for="description">Description:</label>
+            </div>
+            <div class="col-md-8">
+              <textarea class="form-control" name="description" id="description" rows="5" style="max-width: 85%;"
+                required></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="col text-center">
+          <button type="submit" class="btn btn-success">Save</button>
+        </div>
+      </div>
+    </div>
+
+
+  </form>
+</div>
