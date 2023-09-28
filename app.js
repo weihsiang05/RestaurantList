@@ -4,6 +4,7 @@ const { engine } = require('express-handlebars')
 const port = 3000
 //const restaurant = require('./public/jsons/restaurant.json').results
 const db = require('./models')
+const restaurant = require('./models/restaurant')
 const Restaurant = db.Restaurant
 
 app.engine('.hbs', engine({ extname: '.hbs' }))
@@ -51,6 +52,21 @@ app.post('/restaurant', (req, res) => {
   })
     .then(() => {
       res.redirect('/restaurant')
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+})
+
+app.get('/restaurant/:id', (req, res) => {
+  const id = req.params.id
+
+  return Restaurant.findByPk(id, {
+    attributes: ['id', 'name', 'name_en', 'category', 'image', 'location', 'phone', 'google_map', 'rating', 'description'],
+    raw: true
+  })
+    .then((rest) => {
+      res.render('details', { rest })
     })
     .catch((err) => {
       console.log(err)
