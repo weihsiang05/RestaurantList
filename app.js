@@ -116,6 +116,19 @@ app.put('/restaurant/:id', (req, res) => {
     })
 })
 
+app.delete('/restaurant/:id', (req, res) => {
+  const id = req.params.id
+
+  return Restaurant.destroy({
+    where: {
+      id
+    }
+  })
+    .then(() => {
+      res.redirect('/restaurant')
+    })
+})
+
 // app.get('/restaurant', (req, res) => {
 //   //keyword為<input></input>中的name="keyword"
 //   const keywords = req.query.keyword?.trim()

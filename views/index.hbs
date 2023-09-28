@@ -59,11 +59,15 @@
                   </div>
                 </div>
               </a>
-              <div class="card-footer">
+              <div class="card-footer d-flex justify-content-around">
                 <button class="btn btn-primary" type="button"><a class="text-white" style="text-decoration: none;"
                     href="/restaurant/{{res.id}}/edit">Edit</a></button>
                 <button class="btn btn-success" type="button"><a class="text-white" style="text-decoration: none;"
                     href="/restaurant/{{res.id}}">Details</a></button>
+                <form action="/restaurant/{{res.id}}?_method=DELETE" method="POST" style="display:inline">
+                  <button class="btn btn-danger" type="submit">Delete</button>
+                </form>
+
               </div>
             </div>
           </div>
