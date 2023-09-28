@@ -6,6 +6,7 @@ const port = 3000
 const db = require('./models')
 const restaurant = require('./models/restaurant')
 const Restaurant = db.Restaurant
+const methodOverride = require('method-override')
 
 app.engine('.hbs', engine({ extname: '.hbs' }))
 app.set('view engine', '.hbs')
@@ -14,6 +15,9 @@ app.set('views', './views')
 // 傳入靜態網頁
 app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }))
+app.use(express.urlencoded({ extended: true }))
+//'_method' can change different text you want
+app.use(methodOverride('_method'))
 
 app.get('/', (req, res) => {
   res.redirect('/restaurant')
@@ -70,6 +74,45 @@ app.get('/restaurant/:id', (req, res) => {
     })
     .catch((err) => {
       console.log(err)
+    })
+})
+
+app.get('/restaurant/:id/edit', (req, res) => {
+  const id = req.params.id
+
+  return Restaurant.findByPk(id, {
+    attributes: ['id', 'name', 'name_en', 'category', 'image', 'location', 'phone', 'google_map', 'rating', 'description'],
+    raw: true
+  })
+    .then((rest) => {
+      res.render('edit', { rest })
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+})
+
+app.put('/restaurant/:id', (req, res) => {
+  const restaurant = req.body
+  const id = req.params.id
+
+  return Restaurant.update({
+    name: restaurant.name,
+    name_en: restaurant.englishName,
+    category: restaurant.category,
+    image: restaurant.imageUrl,
+    location: restaurant.location,
+    phone: restaurant.phone,
+    google_map: restaurant.googleMapUrl,
+    rating: restaurant.rating,
+    description: restaurant.description
+  }, {
+    where: {
+      id
+    }
+  })
+    .then(() => {
+      res.redirect(`/restaurant`)
     })
 })
 

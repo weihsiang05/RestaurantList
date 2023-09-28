@@ -10,13 +10,11 @@
     </div>
   </nav>
   <div class="banner"></div>
-  <h1 class="mb-1 restaurant-show-title">建立餐廳</h1>
+  <h1 class="mb-1 restaurant-show-title">餐廳編輯</h1>
 </header>
 
-
-
 <div class="container-fluid d-flex align-items-center justify-content-center">
-  <form action="/restaurant" method="POST">
+  <form action="/restaurant/{{rest.id}}?_method=PUT" method="POST">
     <div class="card border-light mb-3" style="width: 1000px; height: 700px;">
       <div class="card-body text-secondary">
         <div class="card-text">
@@ -25,7 +23,7 @@
               <label class="fw-bold" for="name">Name:</label>
             </div>
             <div class="col-md-8">
-              <input class="col-md-10" type="text" id="name" name="name" required>
+              <input class="col-md-10" type="text" id="name" name="name" value="{{rest.name}}" required>
             </div>
           </div>
           <div class="row justify-content-between mb-4 mt-4">
@@ -33,7 +31,8 @@
               <label class="fw-bold" for="englishName">English Name:</label>
             </div>
             <div class="col-md-8">
-              <input class="col-md-10" type="text" id="englishName" name="englishName" required>
+              <input class="col-md-10" type="text" id="englishName" name="englishName" value="{{rest.name_en}}"
+                required>
             </div>
           </div>
           <div class="row justify-content-between mb-4 mt-4">
@@ -41,7 +40,7 @@
               <label class="fw-bold" for="category">Category:</label>
             </div>
             <div class="col-md-8">
-              <input class="col-md-10" type="text" id="category" name="category" required>
+              <input class="col-md-10" type="text" id="category" name="category" value="{{rest.category}}" required>
             </div>
           </div>
           <div class="row justify-content-between mb-4 mt-4">
@@ -49,7 +48,7 @@
               <label class="fw-bold" for="imageUrl">Image Url:</label>
             </div>
             <div class="col-md-8">
-              <input class="col-md-10" type="text" id="imageUrl" name="imageUrl" required>
+              <input class="col-md-10" type="text" id="imageUrl" name="imageUrl" value="{{rest.image}}" required>
             </div>
           </div>
           <div class="row justify-content-between mb-4 mt-4">
@@ -57,7 +56,7 @@
               <label class="fw-bold" for="location">Location:</label>
             </div>
             <div class="col-md-8">
-              <input class="col-md-10" type="text" id="location" name="location" required>
+              <input class="col-md-10" type="text" id="location" name="location" value="{{rest.location}}" required>
             </div>
           </div>
           <div class="row justify-content-between mb-4 mt-4">
@@ -65,15 +64,16 @@
               <label class="fw-bold" for="phone">Phone:</label>
             </div>
             <div class="col-md-8">
-              <input class="col-md-10" type="text" id="phone" name="phone" required>
+              <input class="col-md-10" type="text" id="phone" name="phone" value="{{rest.phone}}" required>
             </div>
           </div>
-          <div class="row justify-content-between mb-4 mt-4">
+          <div class=" row justify-content-between mb-4 mt-4">
             <div class="col-md-2">
               <label class="fw-bold" for="googleMapUrl">Google Map Url:</label>
             </div>
             <div class="col-md-8">
-              <input class="col-md-10" type="text" id="googleMapUrl" name="googleMapUrl" required>
+              <input class="col-md-10" type="text" id="googleMapUrl" name="googleMapUrl" value="{{rest.google_map}}"
+                required>
             </div>
           </div>
           <div class="row justify-content-between mb-4 mt-4">
@@ -81,7 +81,7 @@
               <label class="fw-bold" for="rating">Rating:</label>
             </div>
             <div class="col-md-8">
-              <input class="col-md-10" type="text" id="rating" name="rating" required>
+              <input class="col-md-10" type="text" id="rating" name="rating" value="{{rest.rating}}" required>
             </div>
           </div>
           <div class="row justify-content-between mb-4 mt-4">
@@ -90,7 +90,7 @@
             </div>
             <div class="col-md-8">
               <textarea class="form-control" name="description" id="description" rows="5" style="max-width: 85%;"
-                required></textarea>
+                required>{{rest.description}}</textarea>
             </div>
           </div>
         </div>
@@ -99,7 +99,5 @@
         </div>
       </div>
     </div>
-
-
   </form>
 </div>
