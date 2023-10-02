@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const { engine } = require('express-handlebars')
+const { Op } = require("sequelize");
 const port = 3000
 //const restaurant = require('./public/jsons/restaurant.json').results
 const db = require('./models')
@@ -24,16 +25,39 @@ app.get('/', (req, res) => {
 })
 
 app.get('/restaurant', (req, res) => {
-  return Restaurant.findAll({
-    attributes: ['id', 'name', 'name_en', 'category', 'image', 'location', 'phone', 'google_map', 'rating', 'description'],
-    raw: true
-  })
+  //keyword為<input></input>中的name="keyword"
+  const keywords = req.query.keyword?.trim().toLowerCase()
+
+  return Restaurant.findAll(keywords ?
+    {
+      where: {
+        [Op.or]: {
+          name: {
+            [Op.like]: `%${keywords}%`
+          },
+          name_en: {
+            [Op.like]: `%${keywords}%`
+          },
+          category: {
+            [Op.like]: `%${keywords}%`
+          }
+        }
+      },
+      attributes: ['id', 'name', 'name_en', 'category', 'image', 'location', 'phone', 'google_map', 'rating', 'description'],
+      raw: true
+
+    } : {
+      attributes: ['id', 'name', 'name_en', 'category', 'image', 'location', 'phone', 'google_map', 'rating', 'description'],
+      raw: true
+    }
+  )
     .then((restaurant) => {
-      res.render('index', { restaurant })
+      res.render('index', { restaurant, keywords })
     })
     .catch((err) => {
       res.status(422).json(err)
     })
+
 })
 
 app.get('/restaurant/new', (req, res) => {
@@ -128,6 +152,7 @@ app.delete('/restaurant/:id', (req, res) => {
       res.redirect('/restaurant')
     })
 })
+
 
 // app.get('/restaurant', (req, res) => {
 //   //keyword為<input></input>中的name="keyword"
